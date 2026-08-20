@@ -1,67 +1,46 @@
 
 
 
-
 function Home() {
 
   return (
     // Container principal
-    <div className="bg-indigo-900 flex justify-center"
+     <div className="bg-indigo-900 flex justify-center">
 
-    >
-      {/* Seção com 2 colunas */}
-      <div className="container grid grid-cols-1 md:grid-cols-2 text-white"
-      >
+      {/* Grid */}
+      <div className="container grid grid-cols-2 text-white">
 
-        {/* Conteúdo de texto */}
-        <div className="flex flex-col gap-4 items-center justify-center py-4"
-          
-        >
-          <h2 className="text-2xl md:text-5xl font-bold"
-            
-          >
-            Seja Bem Vinde!
+        {/* Conteúdo textual */}
+        <div className="flex flex-col gap-4 items-center justify-center py-4" >
+       
+          <h2 className="text-5xl font-bold" >
+            Seja Bem Vindo!
           </h2>
 
-          <p className="text-xl"
-          >
-            Expresse aqui seus pensamentos
+          <p className="text-xl">
+            Expresse aqui seus pensamentos!
           </p>
 
-          <div className="flex justify-around gap-4"
-          >
-            <div className="rounded-lg border-2 border-solid border-white py-2 px-4 "
-              // style={{
-              //   borderRadius: "0.5rem",
-              //   border: "2px solid white", vertical
-              //   padding: "0.5rem 1rem" horizontal
-              // }}
-            >
-              Nova Postagem
-            </div>
-            
+          <div className="flex justify-around gap-4" >
+                <div className="rounded-lg border-2 border-solid border-white py-2 px-4" >
+                Nova Postagem
+                </div>
           </div>
+
         </div>
 
-        {/* Imagem da página home */}
-        <div className="flex justify-center"
-          // style={{
-          //   display: "flex",
-          //   justifyContent: "center"
-          // }}
-        >
-              <img 
-                src="https://i.imgur.com/fyfri1v.png"
-                alt="Imagem da página Home"
+
+        {/* Conteúdo de imagem */}
+        <div className="flex justify-center">
+            <img
+                src= "https://i.imgur.com/fyfri1v.png"
+                alt= "Imagem da página Home"
                 className="w-2/3"
-                // style={{
-                //   width: "66%" aqui é 2/3 do tamanho da tela+-
-                // }}
-              />
+            />
         </div>
 
       </div>
-
+      
     </div>
   )
 }
