@@ -6,7 +6,7 @@ import axios from "axios";
 const api = axios.create({
     // COnexão do react como backend, depois com o deploy vamos trocar por uma vaiavel de ambiente,
     //  pq se n fica exposto
-    baseURL: 'https://blogpessoal-spring-629e.onrender.com'
+    baseURL: import.meta.env.VITE_API_URL
 
 })
 

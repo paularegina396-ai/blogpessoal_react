@@ -7,7 +7,6 @@ import { buscar } from "../../../services/Service";
 import CardPostagem from "../cardpostagem/CardPostagem";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 
-
 function ListaPostagens() {
 
     const navigate = useNavigate();
@@ -16,19 +15,22 @@ function ListaPostagens() {
 
     const [postagens, setPostagens] = useState<Postagem[]>([])
 
-    const { usuario, handleLogout } = useContext(AuthContext)
+    const { usuario, handleLogout, isLogout } = useContext(AuthContext)
     const token = usuario.token
 
-    useEffect(() => {
-        if (token === '') {
-            ToastAlerta('Você precisa estar logado!', "info")
-            navigate('/')
-        }
-    }, [token])
 
     useEffect(() => {
-        buscarPostagens()    
-    }, [postagens.length])
+        if (token === "") {
+            if (!isLogout) {
+                ToastAlerta('Você precisa estar logado!', 'info')
+            }
+            navigate("/")
+            return
+        }
+
+        buscarPostagens()
+    }, [token, isLogout])
+
 
     async function buscarPostagens() {
         try {
@@ -42,7 +44,7 @@ function ListaPostagens() {
             if (error.toString().includes('401')) {
                 handleLogout()
             }
-        }finally {
+        } finally {
             setIsLoading(false)
         }
     }
@@ -63,18 +65,18 @@ function ListaPostagens() {
                 <div className="container flex flex-col">
 
                     {(!isLoading && postagens.length === 0) && (
-                            <span className="text-3xl text-center my-8">
-                                Nenhuma Postagem foi encontrada!
-                            </span>
+                        <span className="text-3xl text-center my-8">
+                            Nenhuma Postagem foi encontrada!
+                        </span>
                     )}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 
                                     lg:grid-cols-3 gap-8">
-                            {
-                                postagens.map((postagem) => (
-                                    <CardPostagem key={postagem.id} postagem={postagem}/>
-                                ))
-                            }
+                        {
+                            postagens.map((postagem) => (
+                                <CardPostagem key={postagem.id} postagem={postagem} />
+                            ))
+                        }
                     </div>
                 </div>
             </div>
