@@ -21,7 +21,7 @@ function Footer() {
                 <div className="container flex flex-col items-center py-4">
 
                     <p className="text-xl font-bold">
-                        Blog Pessoal Manuella - Copyright: {data}
+                        Blog Pessoal Paula - Copyright: {data}
                     </p>
 
                     <p className="text-lg">Acesse minhas redes sociais</p>
