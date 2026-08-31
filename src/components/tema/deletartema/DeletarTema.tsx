@@ -4,7 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { buscar, deletar } from "../../../services/Service";
 import { ClipLoader } from "react-spinners";
-import type Tema from "../../../models/tema";
+import type Tema from "../../../models/Tema";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
+
  
 function DeletarTema() {
  
@@ -38,7 +40,7 @@ function DeletarTema() {
  
     }catch (error){
       if (axios.isAxiosError(error)){
-          alert(`Erro ao cadastrar o tema: ${error.response?.status}`);
+          ToastAlerta(`Erro ao cadastrar o tema: ${error.response?.status}`, "erro");
           if(error.response?.status === 401){
             handleLogout();
           }
@@ -61,7 +63,7 @@ function DeletarTema() {
   // useEffect para monitorar o token
   useEffect( () => {
     if (token === ''){
-      alert("Você precisa estar logado!");
+      ToastAlerta("Você precisa estar logado!", "info");
       navigate('/');
     }
   }, [token])
@@ -77,11 +79,11 @@ function DeletarTema() {
           headers: { Authorization: token }
         })
  
-        alert('Tema deletado com sucessso!')
+        ToastAlerta('Tema deletado com sucessso!', "sucesso")
  
     }catch (error){
       if (axios.isAxiosError(error)){
-          alert(`Erro ao cadastrar o tema: ${error.response?.status}`);
+          ToastAlerta(`Erro ao cadastrar o tema: ${error.response?.status}`, "erro");
           if(error.response?.status === 401){
             handleLogout();
           }

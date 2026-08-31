@@ -1,9 +1,12 @@
 import { useEffect, useState, type ChangeEvent, type SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import type Usuario from "../../models/Usuario";
+
 import { cadastrarUsuario } from "../../services/Service";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
+import type Usuario from "../../models/Usuario";
+import { ToastAlerta } from "../../utils/ToastAlerta";
+
 
 function Cadastro() {
 
@@ -73,7 +76,7 @@ function Cadastro() {
     // Precisa validar o formulario - saber se as senhas conferem
     // Valdiar a senha digitada
     if (confirmarSenha !== usuario.senha || usuario.senha.length < 8){
-       alert("Senhas não conferem e/ou possuem menos que 8 caracteres.")
+       ToastAlerta("Senhas não conferem e/ou possuem menos que 8 caracteres.", "erro")
        setUsuario({...usuario, senha:''})
        setConfirmarSenha('')
        return
@@ -84,13 +87,13 @@ function Cadastro() {
     // Envio da requisição
     try{
       await cadastrarUsuario(`/usuarios/cadastrar`, usuario, setUsuario)
-      alert("Usuário cadastrado com sucesso!")
+      ToastAlerta("Usuário cadastrado com sucesso!", "sucesso")
 
     } catch(error){
       if(axios.isAxiosError(error) && error.response){
-        alert(`Erro ao cadastrar o usuário: ${error.response.status}`);
+        ToastAlerta(`Erro ao cadastrar o usuário: ${error.response.status}`, "erro");
       }else {
-        alert("Erro ao cadastrar o usuário! Verifique a conexão com a API.");
+        ToastAlerta("Erro ao cadastrar o usuário! Verifique a conexão com a API.", "erro");
       }
     } finally {
       setIsLoading(false);
@@ -108,7 +111,6 @@ function Cadastro() {
   console.log("Confrmar:", confirmarSenha)
 
   return (
-    <>
       <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold">
         <div
           className="bg-[url('https://i.imgur.com/ZZFAmzo.jpg')] lg:block hidden bg-no-repeat w-full min-h-screen bg-cover bg-center"
@@ -211,7 +213,6 @@ function Cadastro() {
           </div>
         </form>
       </div>
-    </>
   )
 }
 
